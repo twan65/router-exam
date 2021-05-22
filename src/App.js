@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 import About from "./page/About";
 import Home from "./page/Home";
 import HistorySample from "./page/HistorySample";
@@ -23,10 +23,20 @@ const App = () => {
           <Link to="/profiles">Profile</Link>
         </li>
       </ul>
-      <Route exact={true} path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/history" component={HistorySample} />
-      <Route path="/profiles" component={Profiles} />
+      <Switch>
+        <Route exact={true} path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/history" component={HistorySample} />
+        <Route path="/profiles" component={Profiles} />
+        <Route
+          render={({ location }) => (
+            <div>
+              <h2>このページは存在しません。</h2>
+              <p>{location.pathname}</p>
+            </div>
+          )}
+        />
+      </Switch>
     </div>
   );
 };
